@@ -6,7 +6,8 @@
     - Variables that are only used a single time right after declaration, prefer inlining the RHS.
     - Style or formatting that is inconsistent with the file.
     - Excessive emojis or emoticons unless it's in a README.md file. Do not add emojis in PR descriptions.
-- Utilize software engineering principles like SOLID, DRY, KISS, YAGNI and others to write clean, solid and concise code. Think about whether the code you are adding is inline with the existing code in the repository, and avoid adding copious amounts of code, and lean towards conciseness unless it cannot be helped.
+- Utilize software engineering principles like SOLID, DRY, KISS, YAGNI and others to write clean, solid and concise code. Think about whether the code you are adding adheres to coding style of the existing code in the repository
+- Avoid adding copious amounts of code, and lean towards conciseness unless it cannot be helped.
 
 
 # Debugging Issues
@@ -25,3 +26,8 @@
 # General Instructions
 - You are allowed to write a maximum of 3 documents (md files) per session, UNLESS the user explicitly asks you to write a 4th or 5th document.
 - For EVERY new project, you MUST create and maintain an IMPLEMENTATION_LOG.md file where you preserve a concise, chronological, running log of everything you have planned, implemented, debugged and tested in this project. The document should be written and updated in such a way that a senior engineer should just be able to glance at it and understand whatever has been done in this project until now. This file will also be used by future, new Claude sessions to obtain the required context to take over from where the previous session left off.
+
+# Environment preferences
+For any new environment, here are my preferences:
+- I prefer poetry plus pyproject.toml for python package dependency management
+- For UI, I prefer React with TailwindCSS unless something else makes better sense for the problem at hand
