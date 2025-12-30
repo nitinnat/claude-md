@@ -31,3 +31,6 @@
 For any new environment, here are my preferences:
 - I prefer poetry plus pyproject.toml for python package dependency management
 - For UI, I prefer React with TailwindCSS unless something else makes better sense for the problem at hand
+
+# Instructions for long running commands
+- When running commands that can take a long time, like "make" or "docker compose", etc, I want to see the logs in real time when you execute the command.
