@@ -95,3 +95,16 @@ For any new environment, here are my preferences:
 - Handle invalid data (NaN, infinity, null) explicitly before it reaches validation layers
 - Use `math.isnan()` for NaN checks rather than equality comparisons
 - For vector/embedding operations: Validate embeddings are non-zero before performing similarity calculations
+
+## External API Integration & Third-Party Libraries
+- When a library has availability/accessibility issues, evaluate switching to alternative libraries rather than applying workarounds
+- Compare libraries on:
+  - Maintenance status and frequency of updates
+  - Robustness in handling edge cases (videos marked unavailable, age-gated content, region restrictions)
+  - Dependencies and Python version requirements
+  - Community support and issue resolution
+- When switching libraries mid-project:
+  - Create clean implementations in new modules first (don't modify existing code)
+  - Update pyproject.toml dependencies before installing
+  - Run `poetry lock` after dependency changes to ensure consistency
+  - Update all imports and rewrite affected functions to use new library's API
