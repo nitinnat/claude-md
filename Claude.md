@@ -23,6 +23,21 @@
   - Include relevant context: IDs, counts, sizes, status values
 
 
+# Git Workflow
+- **CRITICAL:** NEVER push directly to main/master branch
+- ALWAYS follow this workflow:
+  1. Pull latest from main/master: `git checkout master && git pull origin master`
+  2. Create feature branch: `git checkout -b feature/description` or `fix/description`
+  3. Make changes and commit
+  4. Push branch: `git push -u origin branch-name`
+  5. Create PR using `gh pr create`
+- When fixing issues in merged code:
+  - Pull latest master FIRST
+  - Create new feature branch from updated master
+  - Make fixes on the new branch
+  - Submit new PR
+- Before making any repository changes, verify you're on a feature branch, not master
+
 # Pull Request Descriptions
 - Do not add emojis and emoticons in PR descriptions.
 - Provide a small paragraph describing the entire change, and explain the individual changes below that in concise bullet points.
@@ -80,6 +95,18 @@ For any new environment, here are my preferences:
 - When resolving conflicts: Update to compatible versions across the entire dependency tree
 - Use `poetry lock` to lock without upgrading everything
 - Check for version compatibility between related packages (e.g., langchain, langgraph, langchain-openai)
+- When adding Git dependencies in pyproject.toml:
+  - Use format: `package = { git = "https://github.com/user/repo.git", branch = "main" }`
+  - Run `poetry lock` after adding to generate lock file
+  - Consider adding poetry.lock to version control for reproducible builds
+  - Do not use the --no-update argument with poetry, as it does not exist.
+
+## API Compatibility
+- When updating library versions (e.g., scikit-image), check for breaking API changes:
+  - Deprecated parameter names (e.g., `selem` → `footprint`)
+  - Changed function signatures or return types
+  - Use grep to find all usages: `grep -r "old_param" --include="*.py"`
+  - Update all occurrences consistently across the codebase
 
 # Testing & Validation
 - Before claiming something works, actually test it end-to-end
