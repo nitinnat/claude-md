@@ -1,0 +1,167 @@
+# Blog Writer Skill
+
+Research, write, and publish well-sourced technical blog posts with images and screenshots.
+
+## What This Skill Does
+
+Guides you through creating publication-ready blog posts by:
+1. Researching the topic extensively using Exa web search
+2. Validating all factual claims against credible sources
+3. Generating relevant images using Gemini
+4. Capturing screenshots from actual websites when appropriate
+5. Formatting the post to match the existing blog style
+
+## When to Use This Skill
+
+Use this skill when the user wants to:
+- Write a new blog post about a technical topic
+- Research and validate claims in an existing draft
+- Create a well-sourced article with proper images and screenshots
+
+## Prerequisites
+
+- `GOOGLE_API_KEY` in `.env` for image generation
+- Exa MCP server configured for web research
+- Playwright installed for screenshots
+- Poetry environment set up
+
+## Usage
+
+Simply invoke this skill:
+```
+/blog-writer
+```
+
+Or with a topic:
+```
+/blog-writer <topic>
+```
+
+## What the Skill Does
+
+### 1. Topic Research Phase
+- Uses Exa to search for credible sources (news outlets, technical blogs, official documentation)
+- Gathers 10-15 high-quality sources
+- Validates key facts and claims
+- Identifies notable quotes from experts or key figures
+
+### 2. Content Planning Phase
+- Determines blog structure (sections, flow)
+- Identifies which claims need visual support
+- Plans screenshots (actual websites/interfaces)
+- Plans conceptual images (diagrams, visualizations)
+
+### 3. Writing Phase
+- Writes in the established blog tone:
+  - Direct, objective technical writing
+  - No AI slop (excessive praise, superlatives, defensive code)
+  - No em dashes (use commas, semicolons, colons)
+  - Balanced perspective (acknowledge nuance)
+  - Fact-focused, not hype-focused
+- Follows existing blog structure:
+  - Clear sections with descriptive headers
+  - Technical depth without jargon overload
+  - Sources section at the end
+
+### 4. Image Generation Phase
+- Generates images using `gemini-image-generator` skill
+- Creates 2-4 conceptual visualizations as needed
+- Saves to `content/assets/`
+- Uses descriptive alt text
+
+### 5. Screenshot Capture Phase
+- Captures screenshots using `screenshot-capture` skill
+- Focuses on official websites, interfaces, or notable examples
+- Saves to `content/assets/`
+
+### 6. Validation Phase
+- Cross-references all claims against sources
+- Verifies all links are working
+- Checks that numbers/dates are accurate
+- Ensures proper attribution for quotes
+
+### 7. Publishing Phase
+- Creates `.mdx` file in `content/posts/`
+- Uses correct frontmatter format:
+  ```yaml
+  ---
+  title: "Your Title Here"
+  date: YYYY-MM-DD
+  description: "Brief description"
+  tags: [tag1, tag2, tag3]
+  categories: [category1, category2]
+  draft: false
+  ---
+  ```
+- References images as `/assets/image_name.png`
+- Includes comprehensive sources section
+
+## Blog Style Guidelines
+
+### Tone
+- **Objective and factual**: Prioritize accuracy over excitement
+- **No excessive praise**: Avoid "amazing," "incredible" (unless quoting someone)
+- **Balanced**: Acknowledge limitations, trade-offs, and concerns
+- **Technical but accessible**: Explain complex topics without condescension
+
+### Structure
+- **Introduction**: Set context, explain why the topic matters
+- **Main sections**: 3-5 major sections with clear headers
+- **Conclusion**: Summarize key takeaways without overstating
+- **Sources**: Comprehensive list with working links
+
+### What to Avoid (AI Slop Patterns)
+- Em dashes (use commas, semicolons, colons instead)
+- Excessive exclamation points
+- Superlatives without evidence ("revolutionary," "game-changing")
+- Emoji (unless in code examples where relevant)
+- "Let's dive in" or similar filler phrases
+- Unnecessary comments or docstrings in code examples
+
+### Images
+- **2-4 images per post**
+- Mix of screenshots (real interfaces) and generated visualizations
+- Descriptive alt text
+- Placed strategically to break up text and illustrate key points
+
+### Sources
+- **Minimum 8-10 credible sources**
+- Prefer: Major news outlets, technical blogs, official documentation, research papers
+- Avoid: Social media (unless primary source), low-quality blogs
+- Include source titles and clean URLs
+
+## Example Invocations
+
+```
+User: "Write a blog post about the new Claude 4 model"
+Assistant: [Researches using Exa, validates claims, generates images, writes post]
+
+User: "Create a post about Docker security best practices"
+Assistant: [Researches, captures Docker website screenshots, generates diagrams, writes post]
+
+User: "Review and improve this draft blog post about..."
+Assistant: [Validates claims, adds sources, generates missing images, reformats]
+```
+
+## Output
+
+- Blog post created at `content/posts/<slug>.mdx`
+- Images saved to `content/assets/`
+- Summary of sources used and claims validated
+- Ready for git commit and publishing
+
+## CRITICAL: No AI Attribution
+
+**NEVER add any mention of AI authorship anywhere:**
+- No "Generated by AI" or "Written with Claude" in posts
+- No "Created with AI assistance" in commits
+- No AI mentions in PR descriptions
+- No author attribution to Claude or any AI system
+- Blog posts should appear as human-written content
+
+## Tips
+
+- The skill will ask clarifying questions if the topic is ambiguous
+- You can specify desired sections or angles
+- You can request focus on specific aspects (security, performance, etc.)
+- The skill follows the patterns from existing published posts
