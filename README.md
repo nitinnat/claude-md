@@ -1,1 +1,1 @@
-An evolving Claude.md file to be used in Claude Code sessions.
+An evolving compilation of artifacts for AI-assisted coding.
