@@ -25,6 +25,7 @@
 
 # Git Workflow
 - **CRITICAL:** NEVER push directly to main/master branch
+- **CRITICAL:** NEVER add Co-Authored-By lines to commits (e.g., "Co-Authored-By: Claude Sonnet 4.5")
 - ALWAYS follow this workflow:
   1. Pull latest from main/master: `git checkout master && git pull origin master`
   2. Create feature branch: `git checkout -b feature/description` or `fix/description`
@@ -36,7 +37,13 @@
   - Create new feature branch from updated master
   - Make fixes on the new branch
   - Submit new PR
-- Before making any repository changes, verify you're on a feature branch, not master
+- Before making any repository changes:
+  - Verify you're on a feature branch, not master
+  - Check git status to understand current state
+  - Always read files before editing them to avoid stale content errors
+- When switching branches with uncommitted changes:
+  - Stash changes first: `git stash`
+  - Or ask the user what to do with uncommitted changes before proceeding
 
 # Pull Request Descriptions
 - Do not add emojis and emoticons in PR descriptions.
