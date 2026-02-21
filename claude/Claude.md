@@ -142,3 +142,24 @@ For any new environment, here are my preferences:
   - Update pyproject.toml dependencies before installing
   - Run `poetry lock` after dependency changes to ensure consistency
   - Update all imports and rewrite affected functions to use new library's API
+
+# Pre-commit PII Scrubbing
+
+Before committing or pushing any code, always check all staged files for the following and sanitize where found:
+
+- **Personal email addresses** — remove hardcoded emails from source code (e.g. default values in settings/config). Require them to be set via environment variables with no default.
+- **Real transaction data** — replace specific merchant names, amounts, or transaction IDs used as code examples/comments with generic placeholders (e.g. `SOME MERCHANT $X.XX*`, `INTL MERCHANT INR X,XXX.XX*`).
+- **Inbox/account counts** — remove exact email counts from personal senders from documentation and logs; counts are specific to the user's inbox.
+- **Real email subjects** — replace actual email subjects used as examples with generic templates (e.g. `"You made a $X.XX transaction with MERCHANT"` instead of a real subject).
+- **API keys, tokens, OAuth secrets** — never commit; must be in environment variables or local files excluded by .gitignore.
+- **Personal names or identifiable information** in comments, logs, or documentation.
+
+When sanitizing, preserve the technical meaning — replace specific values with clearly generic placeholders rather than deleting the context entirely.
+
+# Screenshot Capture Skill
+
+When using the `screenshot-capture` skill (`~/.claude/skills/screenshot-capture/scripts/screenshot.js`):
+
+- **`--output` takes a bare filename only** — the script automatically saves to `{cwd}/public/assets/screenshots/{name}.png`. Passing a path (relative or absolute) results in a broken nested path.
+- **Disable auth before screenshotting** — if the app has an auth gate, disable it first (e.g. via an env var like `AUTH_ENABLED=false`), otherwise all screenshots capture the login screen.
+- **Review screenshots for PII before committing** — pages that display real user data may expose names, email addresses, or sensitive figures. Use URL params or UI filters to show non-personal data before capturing.
